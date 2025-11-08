@@ -1,0 +1,15 @@
+name: "📁 Upload de fichier"
+description: "Soumettre un fichier pour le projet (SQL, CSV, documents, etc.)"
+title: "[UPLOAD] - "
+labels: ["upload", "fichier"]
+body:
+  - type: dropdown
+    id: type_fichier
+    attributes:
+      label: "📂 Type de fichier"
+      description: "Sélectionne le type ou la catégorie du fichier"
+      options:
+        - MCD
+        - MLD
+    validations:
+      required: true
