@@ -1,0 +1,20 @@
+name: "SQL Request"
+description: "Soumettre une requête SQL (CREATE, ALTER, INSERT, etc.) pour le projet"
+title: "[SQL] - "
+labels: ["SQL"]
+body:
+  - type: dropdown
+    id: type_requete
+    attributes:
+      label: "Type de requête"
+      description: "Choisis le type de requête SQL"
+      options:
+        - CREATE
+        - ALTER
+        - INSERT
+        - UPDATE
+        - DELETE
+        - SELECT
+        - Autre
+    validations:
+      required: true
