@@ -354,3 +354,41 @@ CREATE TABLE IF NOT EXISTS `conducteur_vehicule` (
     );
 ALTER TABLE `conducteur_vehicule`
     ADD COLUMN IF NOT EXISTS `date_affectation` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `site_vehicule` (
+  `id_vehicule` INT NOT NULL,
+  `id_site` INT NOT NULL,
+  `date_affectation` DATETIME NOT NULL,
+  PRIMARY KEY (`id_vehicule`,`id_site`)
+);
+ALTER TABLE `site_vehicule`
+  ADD COLUMN IF NOT EXISTS `date_affectation` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `controle_technique_vehicule` (
+  `id_vehicule` INT NOT NULL,
+  `id_controle` INT NOT NULL,
+  `date_controle` DATETIME,
+  `statut` ENUM('valide','contre_visite','expire') DEFAULT 'valide',
+  PRIMARY KEY (`id_vehicule`,`id_controle`)
+);
+ALTER TABLE `controle_technique_vehicule`
+  ADD COLUMN IF NOT EXISTS `date_controle` DATETIME,
+  ADD COLUMN IF NOT EXISTS `statut` ENUM('valide','contre_visite','expire') DEFAULT 'valide';
+
+CREATE TABLE IF NOT EXISTS `planning_vehicule` (
+  `id_vehicule` INT NOT NULL,
+  `id_planning` INT NOT NULL,
+  `date_planning` DATETIME NOT NULL,
+  PRIMARY KEY (`id_vehicule`,`id_planning`)
+);
+ALTER TABLE `planning_vehicule`
+  ADD COLUMN IF NOT EXISTS `date_planning` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `planning_conducteur` (
+  `id_conducteur` INT NOT NULL,
+  `id_planning` INT NOT NULL,
+  `date_planning` DATETIME NOT NULL,
+  PRIMARY KEY (`id_conducteur`,`id_planning`)
+);
+ALTER TABLE `planning_conducteur`
+  ADD COLUMN IF NOT EXISTS `date_planning` DATETIME NOT NULL;
