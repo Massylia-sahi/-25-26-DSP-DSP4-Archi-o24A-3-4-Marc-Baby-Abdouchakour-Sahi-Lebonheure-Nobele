@@ -437,5 +437,25 @@ CREATE TABLE IF NOT EXISTS `fournir` (
 );
 ALTER TABLE `fournir`
   ADD COLUMN IF NOT EXISTS `date_fourniture` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `incident_trajet` (
+  `id_trajet` INT NOT NULL,
+  `id_incident` INT NOT NULL,
+  `date_incident` DATETIME NOT NULL,
+  PRIMARY KEY (`id_trajet`,`id_incident`)
+);
+ALTER TABLE `incident_trajet`
+  ADD COLUMN IF NOT EXISTS `date_incident` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `planning_maintenance` (
+  `id_planning` INT NOT NULL,
+  `id_maintenance` INT NOT NULL,
+  `date_planning` DATETIME NOT NULL,
+  PRIMARY KEY (`id_planning`,`id_maintenance`)
+);
+ALTER TABLE `planning_maintenance`
+  ADD COLUMN IF NOT EXISTS `date_planning` DATETIME NOT NULL;
+
+COMMIT;
  
  
