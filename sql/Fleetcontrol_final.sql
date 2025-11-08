@@ -329,5 +329,38 @@ CREATE TABLE IF NOT EXISTS planning_maintenance (
     FOREIGN KEY (id_maintenance) REFERENCES maintenance(id_maintenance) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- =====================================================
+-- Tables pour anomalie et cause_anomalie
+-- =====================================================
+
+CREATE TABLE IF NOT EXISTS cause_anomalie (
+    id_cause_anomalie INT AUTO_INCREMENT,
+    code_anomalie VARCHAR(50) NOT NULL,
+    libelle VARCHAR(255) NOT NULL,
+    description TEXT,
+    PRIMARY KEY(id_cause_anomalie),
+    UNIQUE(code_anomalie),
+    CHECK (CHAR_LENGTH(code_anomalie) > 0),
+    CHECK (CHAR_LENGTH(libelle) > 0)
+);
+
+CREATE TABLE IF NOT EXISTS anomalie (
+    id_anomalie INT AUTO_INCREMENT,
+    description TEXT,
+    libelle VARCHAR(50) NOT NULL,
+    date_detection DATETIME NOT NULL,
+    statut ENUM('ouvert','en cours','résolu','annulé') NOT NULL DEFAULT 'ouvert',
+    cout_reparation DECIMAL(15,2) DEFAULT 0,
+    gravite ENUM('faible','moyenne','élevée','critique'),
+    id_vehicule INT,
+    id_cause_anomalie INT NOT NULL,
+    id_incident INT,
+    PRIMARY KEY(id_anomalie),
+    FOREIGN KEY(id_vehicule) REFERENCES vehicule(id_vehicule) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY(id_cause_anomalie) REFERENCES cause_anomalie(id_cause_anomalie) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY(id_incident) REFERENCES incident(id_incident) ON DELETE SET NULL ON UPDATE CASCADE,
+    CHECK (CHAR_LENGTH(libelle) > 0),
+    CHECK (cout_reparation >= 0)
+);
 
 COMMIT;
