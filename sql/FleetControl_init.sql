@@ -392,3 +392,50 @@ CREATE TABLE IF NOT EXISTS `planning_conducteur` (
 );
 ALTER TABLE `planning_conducteur`
   ADD COLUMN IF NOT EXISTS `date_planning` DATETIME NOT NULL;
+  CREATE TABLE IF NOT EXISTS `louer` (
+  `id_vehicule` INT NOT NULL,
+  `id_client` INT NOT NULL,
+  `date_location` DATETIME NOT NULL,
+  PRIMARY KEY (`id_vehicule`,`id_client`)
+);
+ALTER TABLE `louer`
+  ADD COLUMN IF NOT EXISTS `date_location` DATETIME NOT NULL;
+ 
+CREATE TABLE IF NOT EXISTS `intervention_technicien` (
+  `id_technicien` INT NOT NULL,
+  `id_intervention` INT NOT NULL,
+  PRIMARY KEY (`id_technicien`,`id_intervention`)
+);
+ALTER TABLE `intervention_technicien`
+  ADD COLUMN IF NOT EXISTS `id_technicien` INT NOT NULL,
+  ADD COLUMN IF NOT EXISTS `id_intervention` INT NOT NULL;
+ 
+CREATE TABLE IF NOT EXISTS `maintenance_vehicule` (
+  `id_vehicule` INT NOT NULL,
+  `id_maintenance` INT NOT NULL,
+  `date_maintenance` DATETIME NOT NULL,
+  PRIMARY KEY (`id_vehicule`,`id_maintenance`)
+);
+ALTER TABLE `maintenance_vehicule`
+  ADD COLUMN IF NOT EXISTS `date_maintenance` DATETIME NOT NULL;
+ 
+CREATE TABLE IF NOT EXISTS `maitrise` (
+  `id_technicien` INT NOT NULL,
+  `id_specialite` INT NOT NULL,
+  PRIMARY KEY (`id_technicien`,`id_specialite`)
+);
+ 
+ALTER TABLE `maitrise`
+  ADD COLUMN IF NOT EXISTS `id_technicien` INT NOT NULL,
+  ADD COLUMN IF NOT EXISTS `id_specialite` INT NOT NULL;
+ 
+CREATE TABLE IF NOT EXISTS `fournir` (
+  `id_fournisseur` INT NOT NULL,
+  `id_piece` INT NOT NULL,
+  `date_fourniture` DATETIME NOT NULL,
+  PRIMARY KEY (`id_fournisseur`,`id_piece`)
+);
+ALTER TABLE `fournir`
+  ADD COLUMN IF NOT EXISTS `date_fourniture` DATETIME NOT NULL;
+ 
+ 
